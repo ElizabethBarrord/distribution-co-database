@@ -101,13 +101,13 @@ VALUES
 	(0005,'warehouse0003', 50);
 
 INSERT INTO part
-	(partno, pname, bdate, bqty)
+	(partno, pname, bdate, bqty, empno)
 VALUES
-	(1114, 'tire', '2018-23-03', 12),
-	(1002, 'mirror', '2018-20-01', 15),
-	(1003, 'side door', '2018-20-01', 35),
-	(1004, 'wheel', '2018-10-10', 40),
-	(1005, 'gas pedal', '2018-05-2', 47);
+	(1114, 'tire', '2018-23-03', 12, 2001),
+	(1002, 'mirror', '2018-20-01', 15, 2004),
+	(1003, 'side door', '2018-20-01', 35,2005),
+	(1004, 'wheel', '2018-10-10', 40, 2001),
+	(1005, 'gas pedal', '2018-05-2', 47, 2001);
 
 INSERT INTO manager
 	(empno, mname)
@@ -123,8 +123,8 @@ INSERT INTO comprises
 VALUES
 	(),
 	(),
-	('),
-	('),
+	(),
+	(),
 	();
 
 
@@ -140,7 +140,7 @@ VALUES
 	(3004, '2018-1-8', 70, 0001,'warehouse0004');
 
 INSERT INTO instances
-	(itemno, partno, size, batchno)
+	(itemno, partno, batchno)
 VALUES
 	(),
 	(),
@@ -149,22 +149,22 @@ VALUES
 	();
 
 INSERT INTO item
-	(itemno, batchno, partno, idateout)
+	(itemno, batchno, partno, idateout, empno)
 VALUES
-	(4001, 3002, 1114,'2018-01-01'),
-	(4002, 3003, 1003,'2018-05-11'),
-	(4003, 3001, 1004,'2018-04-12'),
-	(4004, 3005, 1004,'2018-04-9'),
-	(4005, 3002, 1005,'2018-04-29');
+	(4001, 3002, 1114,'2018-01-01', 2005),
+	(4002, 3003, 1003,'2018-05-11', 2003),
+	(4003, 3001, 1004,'2018-04-12', 2003),
+	(4004, 3005, 1004,'2018-04-9', 2002),
+	(4005, 3002, 1005,'2018-04-29', 2003);
 
 INSERT INTO assembly
-	(assemblyno, adateout)
+	(assemblyno, adateout, empno)
 VALUES
-	(5001, '2018-07-13'),
-	(5002, '2018-05-3'),
-	(5003, '2018-10-10'),
-	(5004, '2018-07-13'),
-	(5005, '2018-07-13');
+	(5001, '2018-07-13', 2004),
+	(5002, '2018-05-3', 2001),
+	(5003, '2018-10-10', 2004),
+	(5004, '2018-07-13', 2003),
+	(5005, '2018-07-13', 2005);
 
 ALTER TABLE bin
 	ADD FOREIGN KEY (wcode) REFERENCES warehouse(wcode);
