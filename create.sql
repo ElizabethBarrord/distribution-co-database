@@ -23,6 +23,7 @@ CREATE TABLE part
 	pname varchar(20),
 	bdate datetime,
 	bqty int,
+	empno int NOT NULL,
 	PRIMARY KEY (partno)
 );
 
@@ -48,7 +49,7 @@ CREATE TABLE batch
 	datein datetime NOT NULL,
 	size int,
 	binno int,
-	wcode varchar(9) NOT NULL,
+	wcode varchar(15) NOT NULL,
 	PRIMARY KEY (batchno)
 );
 
@@ -67,6 +68,7 @@ CREATE TABLE item
 	batchno int NOT NULL,
 	partno int NOT NULL,
 	idateout datetime,
+	empno int NOT NULL,
 	PRIMARY KEY (itemno, batchno, partno)
 );
 
@@ -167,6 +169,9 @@ VALUES
 ALTER TABLE bin
 	ADD FOREIGN KEY (wcode) REFERENCES warehouse(wcode);
 
+ALTER TABLE part
+	ADD FOREIGN KEY (empno) REFERENCES manager(empno);
+
 ALTER TABLE comprises
 	ADD FOREIGN KEY (itemno) REFERENCES item(itemno),
 	ADD FOREIGN KEY (partno) REFERENCES item(partno),
@@ -175,7 +180,7 @@ ALTER TABLE comprises
 
 ALTER TABLE batch
 	ADD FOREIGN KEY (binno) REFERENCES bin(binno),
-	ADD FOREIGN KEY (wcode) REFERENCES warehouse(wcode);
+	ADD FOREIGN KEY (wcode) REFERENCES bin(wcode);
 
 ALTER TABLE instances
 	ADD FOREIGN KEY (itemno) REFERENCES item(itemno),
@@ -184,7 +189,8 @@ ALTER TABLE instances
 
 ALTER TABLE item
 	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno),
-	ADD FOREIGN KEY (partno) REFERENCES part(partno);
+	ADD FOREIGN KEY (partno) REFERENCES part(partno)
+	ADD FOREIGN KEY (empno) REFERENCES manager(empno);
 
 ALTER TABLE assembly
-	ADD FOREIGN KEY (empno) REFERENCES manager(empno),
+	ADD FOREIGN KEY (empno) REFERENCES manager(empno);
