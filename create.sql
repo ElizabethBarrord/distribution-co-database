@@ -74,7 +74,8 @@ CREATE TABLE assembly
 (
 	assemblyno int NOT NULL,
 	adateout datetime NOT NULL,
-	PRIMARY KEY (assemblyno)
+	empno int NOT NULL,
+	PRIMARY KEY (assemblyno);
 );
 
 
@@ -168,10 +169,9 @@ ALTER TABLE bin
 
 ALTER TABLE comprises
 	ADD FOREIGN KEY (itemno) REFERENCES item(itemno),
-	ADD FOREIGN KEY (partno) REFERENCES part(partno),
-	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno),
+	ADD FOREIGN KEY (partno) REFERENCES item(partno),
+	ADD FOREIGN KEY (batchno) REFERENCES item(batchno),
 	ADD FOREIGN KEY (assemblyno) REFERENCES assembly(assemblyno);
-
 
 ALTER TABLE batch
 	ADD FOREIGN KEY (binno) REFERENCES bin(binno),
@@ -186,5 +186,5 @@ ALTER TABLE item
 	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno),
 	ADD FOREIGN KEY (partno) REFERENCES part(partno);
 
-ALTER TABLE dependent
-	ADD FOREIGN KEY (essn) REFERENCES employee(ssn);
+ALTER TABLE assembly
+	ADD FOREIGN KEY (empno) REFERENCES manager(empno),
