@@ -83,32 +83,37 @@ INSERT INTO warehouse
 VALUES
 	('warehouse0001','Warehouse 1'),
 	('warehouse0002','Warehouse 2'),
-	('warehouse0003','Warehouse 3');
+	('warehouse0003','Warehouse 3'),
+	('warehouse0004','Warehouse 4'),
+	('warehouse0005','Warehouse 5'),
+	('warehouse0006','Warehouse 6');
 
 INSERT INTO bin
 	(binno, wcode, capacity)
 VALUES
-	(10001,'warehouse0001', 50),
-	(10002,'warehouse0001', 40),
-	();
+	(0001,'warehouse0001', 50),
+	(0002,'warehouse0001', 40),
+	(0003,'warehouse0001', 40),
+	(0004,'warehouse0003', 50),
+	(0005,'warehouse0003', 50);
 
 INSERT INTO part
 	(partno, pname, bdate, bqty)
 VALUES
-	(),
-	(),
-	('),
-	('),
-	();
+	(1114, 'tire', '2018-23-03', 12),
+	(1002, 'mirror', '2018-20-01', 15),
+	(1003, 'side door', '2018-20-01', 35),
+	(1004, 'wheel', '2018-10-10', 40),
+	(1005, 'gas pedal', '2018-05-2', 47);
 
 INSERT INTO manager
 	(empno, mname)
 VALUES
-	(),
-	(),
-	('),
-	('),
-	();
+	(2001, 'Sarah Kelly'),
+	(2002, 'Justin Baker'),
+	(2003, 'Jacob Back'),
+	(2004, 'Edward Cullen'),
+	(2005, 'Shauna Weiss');
 
 INSERT INTO comprises
 	(itemno, partno, batchno, assemblyno)
@@ -124,11 +129,12 @@ VALUES
 INSERT INTO batch
 	(batchno, datein, size, binno, wcode)
 VALUES
-	(),
-	(),
-	('),
-	('),
-	();
+	(int, datetime, int, int, varchar),
+	(3001, '2018-01-01', 100, 0002,'warehouse0001'),
+	(3002, '2018-03-30', 210, 0004,'warehouse0004'),
+	(3003, '2018-05-11', 300, 0001,'warehouse0005'),
+	(3004, '2018-15-6', 50, 0003,'warehouse0002'),
+	(3004, '2018-1-8', 70, 0001,'warehouse0004');
 
 INSERT INTO instances
 	(itemno, partno, size, batchno)
@@ -140,22 +146,22 @@ VALUES
 	();
 
 INSERT INTO item
-	(itemno, batchno, partno, idateno)
+	(itemno, batchno, partno, idateout)
 VALUES
-	(),
-	(),
-	(),
-	(),
-	();
+	(4001, 3002, 1114,'2018-01-01'),
+	(4002, 3003, 1003,'2018-05-11'),
+	(4003, 3001, 1004,'2018-04-12'),
+	(4004, 3005, 1004,'2018-04-9'),
+	(4005, 3002, 1005,'2018-04-29');
 
 INSERT INTO assembly
 	(assemblyno, adateout)
 VALUES
-	(),
-	(),
-	(),
-	(),
-	();
+	(5001, '2018-07-13'),
+	(5002, '2018-05-3'),
+	(5003, '2018-10-10'),
+	(5004, '2018-07-13'),
+	(5005, '2018-07-13');
 
 ALTER TABLE bin
 	ADD FOREIGN KEY (wcode) REFERENCES warehouse(wcode);
