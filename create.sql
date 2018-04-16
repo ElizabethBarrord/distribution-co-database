@@ -121,13 +121,11 @@ VALUES
 INSERT INTO comprises
 	(itemno, partno, batchno, assemblyno)
 VALUES
-	(),
-	(),
-	(),
-	(),
-	();
-
-
+	(4001, 1114, 3002, 5001),
+	(4002, 1003, 3003, 5002),
+	(4003, 1004, 3001, 5003),
+	(4004, 1004, 3005, 5004),
+	(4005, 1005, 3002, 5005);
 
 INSERT INTO batch
 	(batchno, datein, size, binno, wcode)
@@ -142,11 +140,11 @@ VALUES
 INSERT INTO instances
 	(itemno, partno, batchno)
 VALUES
-	(),
-	(),
-	(),
-	(),
-	();
+	(4001, 1114, 3002),
+	(4002, 1003, 3003),
+	(4003, 1004, 3001),
+	(4004, 1004, 3005),
+	(4005, 1005, 3002);
 
 INSERT INTO item
 	(itemno, batchno, partno, idateout, empno)
