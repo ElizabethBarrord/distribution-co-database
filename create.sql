@@ -66,7 +66,7 @@ CREATE TABLE item
 	itemno int NOT NULL,
 	batchno int NOT NULL,
 	partno int NOT NULL,
-	idateout datetime
+	idateout datetime,
 	PRIMARY KEY (itemno, batchno, partno)
 );
 
@@ -161,24 +161,24 @@ ALTER TABLE bin
 	ADD FOREIGN KEY (wcode) REFERENCES warehouse(wcode);
 
 ALTER TABLE comprises
-	ADD FOREIGN KEY (itemno) REFERENCES item(itemno);
-	ADD FOREIGN KEY (partno) REFERENCES part(partno);
-	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno);
+	ADD FOREIGN KEY (itemno) REFERENCES item(itemno),
+	ADD FOREIGN KEY (partno) REFERENCES part(partno),
+	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno),
 	ADD FOREIGN KEY (assemblyno) REFERENCES assembly(assemblyno);
 
 
 ALTER TABLE batch
-	ADD FOREIGN KEY (binno) REFERENCES bin(binno);
+	ADD FOREIGN KEY (binno) REFERENCES bin(binno),
 	ADD FOREIGN KEY (wcode) REFERENCES warehouse(wcode);
 
 ALTER TABLE instances
-	ADD FOREIGN KEY (itemno) REFERENCES item(itemno);
-	ADD FOREIGN KEY (partno) REFERENCES part(partno);
+	ADD FOREIGN KEY (itemno) REFERENCES item(itemno),
+	ADD FOREIGN KEY (partno) REFERENCES part(partno),
 	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno);
 
 ALTER TABLE item
 	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno),
-	ADD FOREIGN KEY (partno) REFERENCES part(partno),
+	ADD FOREIGN KEY (partno) REFERENCES part(partno);
 
 ALTER TABLE dependent
 	ADD FOREIGN KEY (essn) REFERENCES employee(ssn);
