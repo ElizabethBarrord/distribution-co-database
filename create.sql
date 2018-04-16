@@ -11,14 +11,6 @@ CREATE TABLE warehouse
 	PRIMARY KEY (wcode)
 );
 
-CREATE TABLE bin
-(
-	wcode varchar(15) NOT NULL,
-	binno int NOT NULL,
-	capacity int,
-	PRIMARY KEY (wcode, binno)
-);
-
 CREATE TABLE part
 (
 	partno int NOT NULL,
@@ -29,20 +21,12 @@ CREATE TABLE part
 	PRIMARY KEY (partno)
 );
 
-CREATE TABLE manager
+CREATE TABLE abin
 (
-	empno int NOT NULL,
-	mname varchar(20),
-	PRIMARY KEY (empno)
-);
-
-CREATE TABLE comprises
-(
-	itemno int NOT NULL,
-	partno int NOT NULL,
-	batchno int NOT NULL,
-	assemblyno int NOT NULL,
-	PRIMARY KEY (itemno, partno, batchno, assemblyno)
+	wcode varchar(15) NOT NULL,
+	binno int NOT NULL,
+	capacity int,
+	PRIMARY KEY (wcode, binno)
 );
 
 CREATE TABLE batch
@@ -50,18 +34,9 @@ CREATE TABLE batch
 	batchno int NOT NULL,
 	datein varchar(10) NOT NULL,
 	size int,
-	binno int,
+	binno int NOT NULL,
 	wcode varchar(15) NOT NULL,
 	PRIMARY KEY (batchno)
-);
-
-
-CREATE TABLE instances
-(
-	itemno int NOT NULL,
-	partno int NOT NULL,
-	batchno int NOT NULL,
-	PRIMARY KEY (itemno, partno, batchno)
 );
 
 CREATE TABLE item
@@ -74,12 +49,37 @@ CREATE TABLE item
 	PRIMARY KEY (itemno, batchno, partno)
 );
 
+CREATE TABLE manager
+(
+	empno int NOT NULL,
+	mname varchar(20),
+	PRIMARY KEY (empno)
+);
+
+CREATE TABLE instances
+(
+	itemno int NOT NULL,
+	partno int NOT NULL,
+	batchno int NOT NULL,
+	PRIMARY KEY (itemno, partno, batchno)
+);
+
+
 CREATE TABLE assembly
 (
 	assemblyno int NOT NULL,
 	adateout varchar(10) NOT NULL,
 	empno int NOT NULL,
 	PRIMARY KEY (assemblyno)
+);
+
+CREATE TABLE comprises
+(
+	itemno int NOT NULL,
+	partno int NOT NULL,
+	batchno int NOT NULL,
+	assemblyno int NOT NULL,
+	PRIMARY KEY (itemno, partno, batchno, assemblyno)
 );
 
 
@@ -93,7 +93,7 @@ VALUES
 	('warehouse0005','Warehouse 5'),
 	('warehouse0006','Warehouse 6');
 
-INSERT INTO bin
+INSERT INTO abin
 	(binno, wcode, capacity)
 VALUES
 	(0001,'warehouse0001', 50),
@@ -165,10 +165,28 @@ VALUES
 	(5004, '2018-07-13', 2003),
 	(5005, '2018-07-13', 2005);
 
-ALTER TABLE bin
-	ADD FOREIGN KEY (wcode) REFERENCES warehouse(wcode);
 
 ALTER TABLE part
+	ADD FOREIGN KEY (empno) REFERENCES manager(empno);
+
+ALTER TABLE abin
+	ADD FOREIGN KEY (wcode) REFERENCES warehouse(wcode);
+
+ALTER TABLE batch
+	ADD FOREIGN KEY (wcode) REFERENCES abin(wcode),
+    ADD FOREIGN KEY (binno) REFERENCES abin(binno);
+
+ALTER TABLE item
+	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno),
+	ADD FOREIGN KEY (partno) REFERENCES part(partno),
+	ADD FOREIGN KEY (empno) REFERENCES manager(empno);
+
+ALTER TABLE instances
+	ADD FOREIGN KEY (itemno) REFERENCES item(itemno),
+	ADD FOREIGN KEY (partno) REFERENCES part(partno),
+	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno);
+
+ALTER TABLE assembly
 	ADD FOREIGN KEY (empno) REFERENCES manager(empno);
 
 ALTER TABLE comprises
@@ -176,20 +194,3 @@ ALTER TABLE comprises
 	ADD FOREIGN KEY (partno) REFERENCES item(partno),
 	ADD FOREIGN KEY (batchno) REFERENCES item(batchno),
 	ADD FOREIGN KEY (assemblyno) REFERENCES assembly(assemblyno);
-
-ALTER TABLE batch
-	ADD FOREIGN KEY (binno) REFERENCES bin(binno),
-	ADD FOREIGN KEY (wcode) REFERENCES bin(wcode);
-
-ALTER TABLE instances
-	ADD FOREIGN KEY (itemno) REFERENCES item(itemno),
-	ADD FOREIGN KEY (partno) REFERENCES part(partno),
-	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno);
-
-ALTER TABLE item
-	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno),
-	ADD FOREIGN KEY (partno) REFERENCES part(partno),
-	ADD FOREIGN KEY (empno) REFERENCES manager(empno);
-
-ALTER TABLE assembly
-	ADD FOREIGN KEY (empno) REFERENCES manager(empno);
