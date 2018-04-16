@@ -79,7 +79,7 @@ CREATE TABLE assembly
 
 
 INSERT INTO warehouse
-	(wcode, w-name)
+	(wcode, wname)
 VALUES
 	('warehouse0001','Warehouse 1'),
 	('warehouse0002','Warehouse 2'),
