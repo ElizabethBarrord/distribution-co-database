@@ -38,7 +38,7 @@ CREATE TABLE comprises
 	itemno int NOT NULL,
 	partno int NOT NULL,
 	batchno int NOT NULL,
-assemblyno int NOT NULL,
+	assemblyno int NOT NULL,
 	PRIMARY KEY (itemno, partno, batchno, assemblyno)
 );
 
