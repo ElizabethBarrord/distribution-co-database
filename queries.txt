@@ -1,0 +1,23 @@
+select batch-no
+from batch
+where size = 100;
+
+select emp-no
+from manager
+where manager.emp-no not in (select part.emp-no from part);
+
+select assembly-no, count(item-no) as items
+from assembly, comprises
+where assembly.assembly-no = comprises.assembly-no 
+group by assembly.assembly-no
+having items >= 2;
+
+select assembly-no, item-no
+from assembly, comprises
+where assembly.assembly-no = comprises.assembly-no
+
+select m-name, emp-no, batch-no
+from manager, part, comprises, batch
+where manager.emp-no = part.emp-no and part.part-no = 1114 and part.part-no = comprises.part-no and comprises.batch-no = batch.batch-no;
+
+select 
