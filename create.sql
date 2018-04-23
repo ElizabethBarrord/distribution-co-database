@@ -24,18 +24,18 @@ CREATE TABLE part
 CREATE TABLE abin
 (
 	wcode varchar(15) NOT NULL,
-	binno int NOT NULL,
+	binno int(11) NOT NULL,
 	capacity int,
 	PRIMARY KEY (wcode, binno)
 );
 
 CREATE TABLE batch
 (
-	batchno int NOT NULL,
+	batchno int(11) NOT NULL,
 	datein varchar(10) NOT NULL,
 	size int,
-	binno int NOT NULL,
 	wcode varchar(15) NOT NULL,
+	binno int(11) NOT NULL,
 	PRIMARY KEY (batchno)
 );
 
@@ -173,8 +173,8 @@ ALTER TABLE abin
 	ADD FOREIGN KEY (wcode) REFERENCES warehouse(wcode);
 
 ALTER TABLE batch
-	ADD FOREIGN KEY (wcode) REFERENCES abin(wcode),
-    ADD FOREIGN KEY (binno) REFERENCES abin(binno);
+	ADD FOREIGN KEY (binno) REFERENCES abin(binno),
+	ADD FOREIGN KEY (wcode) REFERENCES abin(wcode);
 
 ALTER TABLE item
 	ADD FOREIGN KEY (batchno) REFERENCES batch(batchno),
