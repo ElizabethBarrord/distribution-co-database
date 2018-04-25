@@ -12,10 +12,10 @@ INSERT INTO abin
 	(binno, wcode, capacity)
 VALUES
 	(0001,'warehouse0001', 50),
-	(0002,'warehouse0001', 40),
-	(0003,'warehouse0001', 40),
-	(0004,'warehouse0003', 50),
-	(0005,'warehouse0003', 50);
+	(0004,'warehouse0004', 40),
+	(0001,'warehouse0005', 40),
+	(0003,'warehouse0002', 50),
+	(0005,'warehouse0006', 50);
 
 INSERT INTO manager
   	(empno, mname)
@@ -38,7 +38,7 @@ INSERT INTO part
 INSERT INTO batch
   	(batchno, datein, size, binno, wcode)
   VALUES
-  	(3001, '2018-01-01', 100, 0002,'warehouse0001'),
+  	(3001, '2018-01-01', 100, 0001,'warehouse0001'),
   	(3002, '2018-03-30', 210, 0004,'warehouse0004'),
   	(3003, '2018-05-11', 300, 0001,'warehouse0005'),
   	(3004, '2018-15-06', 50, 0003,'warehouse0002'),

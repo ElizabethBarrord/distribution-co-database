@@ -104,10 +104,8 @@ ALTER TABLE comprises
 	ADD FOREIGN KEY (batchno) REFERENCES item(batchno),
 	ADD FOREIGN KEY (assemblyno) REFERENCES assembly(assemblyno);
 
-
 ALTER TABLE abin
 	ADD FOREIGN KEY (wcode) REFERENCES warehouse(wcode);
 
 ALTER TABLE batch
-	ADD FOREIGN KEY (binno) REFERENCES abin(binno),
-	ADD FOREIGN KEY (wcode) REFERENCES abin(wcode);
+	ADD FOREIGN KEY (binno,wcode) REFERENCES abin(binno,wcode);
