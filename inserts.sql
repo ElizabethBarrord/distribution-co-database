@@ -15,7 +15,7 @@ VALUES
 	(0004, 'warehouse0004', 40),
 	(0001, 'warehouse0005', 40),
 	(0003, 'warehouse0002', 50),
-	(0005,' warehouse0006', 50);
+	(0005,'warehouse0006', 50);
 
 INSERT INTO manager
   	(empno, mname)
