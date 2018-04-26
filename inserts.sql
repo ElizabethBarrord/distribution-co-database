@@ -15,10 +15,10 @@ VALUES
 	(0004, 'warehouse0004', 40),
 	(0001, 'warehouse0005', 40),
 	(0003, 'warehouse0002', 50),
-	(0005,'warehouse0006', 50);
+	(0005, 'warehouse0006', 50);
 
 INSERT INTO manager
-  	(empno, mname)
+  	(empno, mname) 
   VALUES
   	(2001, 'Sarah Kelly'),
   	(2002, 'Justin Baker'),
@@ -81,4 +81,5 @@ VALUES
 	(4002, 1003, 3003),
 	(4003, 1004, 3001),
 	(4004, 1004, 3005),
-	(4005, 1005, 3002);
+	(4005, 1005, 3002),
+    (4006, 1006, 3002);
